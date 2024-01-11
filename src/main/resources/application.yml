@@ -1,0 +1,31 @@
+
+server:
+  port: 9021
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/umi_paymen_test
+    username: root
+    password: 12345
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  sql:
+    init:
+      platform: mysql
+
+  thymeleaf:
+    cache: false
+  application:
+    name: USER-AUTH-SERVICE
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+
