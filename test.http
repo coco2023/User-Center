@@ -8,8 +8,6 @@ Content-Type: application/json
   "recipient": "paypal@example.com"
 }
 
-###
-
 ### Test Stripe Payment
 POST http://localhost:9024/api/users/1/pay/stripe
 Content-Type: application/json
@@ -22,7 +20,6 @@ Content-Type: application/json
   "stripeToken": "tok_visa"
 }
 
-###
 
 ### Test AliPay Payment
 POST http://localhost:9024/api/users/1/pay/alipay
