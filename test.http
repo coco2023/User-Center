@@ -1,0 +1,49 @@
+### Test PayPal Payment
+POST http://localhost:9024/api/users/1/pay/paypal
+Content-Type: application/json
+
+{
+  "amount": 100.50,
+  "currency": "USD",
+  "recipient": "paypal@example.com"
+}
+
+###
+
+### Test Stripe Payment
+POST http://localhost:9024/api/users/1/pay/stripe
+Content-Type: application/json
+
+{
+  "description": "Test Payment",
+  "amount": 1000,
+  "currency": "usd",
+  "stripeEmail": "user@example.com",
+  "stripeToken": "tok_visa"
+}
+
+###
+
+### Test AliPay Payment
+POST http://localhost:9024/api/users/1/pay/alipay
+Content-Type: application/json
+
+{
+  "amount": 150.75,
+  "currency": "CNY",
+  "recipient": "alipay@example.com"
+}
+
+### Create User
+POST http://localhost:9024/api/users
+Content-Type: application/json
+
+{
+  "username": "newUser3",
+  "email": "newuser3@example.com",
+  "passwordHash": "encryptedPassword",
+  "createdAt": "2024-01-11T10:00:00",
+  "updatedAt": "2024-01-11T10:00:00"
+}
+
+###
