@@ -54,3 +54,47 @@ Content-Type: application/json
   "paypalClientId": "ARVTEXvfH2vehSfPi70J8wwYqyUK-zUfzbvvrQ3DQ3HzyGpyJJKroiZafyDy8xy7CCOMRLIjnZm-vmS8",
   "paypalClientSecret": "EDtRJPFl57bwygK882dnbTyEf4QsQzeLTbOL3nZjP46Vo-gd47-Xfm0cV2szj_h6I_iSSFVjO7ZJaGkk"
 }
+
+### Create Sales Order
+POST http://localhost:9024/api/users/checkout/create-order
+Content-Type: application/json
+
+{
+  "salesOrderId": null,
+  "salesOrderSn": "SN12347",
+  "customerId": 1,
+  "supplierId": 1,
+  "customerName": "John Doe",
+  "customerEmail": "john.doe@example.com",
+  "totalAmount": 19.00,
+  "shippingAddress": "1234 Main St, Anytown, AT 12345",
+  "billingAddress": "1234 Main St, Anytown, AT 12345",
+  "orderStatus": "PENDING",
+  "paymentMethod": "PayPal",
+  "paymentProcessed": false,
+  "expirationDate": "2024-01-19T15:00:00",
+  "salesOrderDetail": [
+    {
+      "salesOrderDetailId": 456,
+      "salesOrderSn": "SN12345",
+      "skuCode": "SKU00124",
+      "supplierId": 1,
+      "quantity": 10,
+      "unitPrice": 2.00,
+      "discount": 0.10,
+      "lineTotal": 19.00
+    }
+  ]
+}
+
+### Complete PayPal Payment
+POST localhost:9024/api/users/checkout/complete-order
+Content-Type: application/x-www-form-urlencoded
+
+paymentId=PAYID-MWQY4UY5ED84563H1514780C&PayerID=3YGU5VNUABDU8&SupplierId=1
+
+### Complete Order and Checkout
+POST localhost:9024/api/users/checkout/complete-order?paymentId=PAYID-MWQY4UY5ED84563H1514780C&PayerID=3YGU5VNUABDU8&SupplierId=1
+Content-Type: application/json
+
+###
