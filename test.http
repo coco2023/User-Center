@@ -44,3 +44,13 @@ Content-Type: application/json
 }
 
 ###
+### Supplier create 2
+POST http://localhost:9024/api/v1/suppliers
+Content-Type: application/json
+
+{
+  "supplierName": "UmiUni",
+  "contactInfo": "Email: supplier5@example.com, Phone: +98766743210",
+  "paypalClientId": "ARVTEXvfH2vehSfPi70J8wwYqyUK-zUfzbvvrQ3DQ3HzyGpyJJKroiZafyDy8xy7CCOMRLIjnZm-vmS8",
+  "paypalClientSecret": "EDtRJPFl57bwygK882dnbTyEf4QsQzeLTbOL3nZjP46Vo-gd47-Xfm0cV2szj_h6I_iSSFVjO7ZJaGkk"
+}
