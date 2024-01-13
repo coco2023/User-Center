@@ -4,7 +4,10 @@ import com.UmiUni.shop.userauthservice.dto.SalesOrderDTO;
 import com.UmiUni.shop.userauthservice.dto.SalesOrderDetailDTO;
 import com.UmiUni.shop.userauthservice.entity.SalesOrder;
 import com.UmiUni.shop.userauthservice.entity.SalesOrderDetail;
+import com.UmiUni.shop.userauthservice.extrenal.model.StripePaymentRequest;
+import com.UmiUni.shop.userauthservice.extrenal.model.StripePaymentResponse;
 import com.UmiUni.shop.userauthservice.extrenal.payment.PayPalPaymentService;
+import com.UmiUni.shop.userauthservice.extrenal.payment.StripePaymentService;
 import com.UmiUni.shop.userauthservice.extrenal.salesOrder.SalesOrderDetailService;
 import com.UmiUni.shop.userauthservice.extrenal.salesOrder.SalesOrderService;
 import com.UmiUni.shop.userauthservice.model.PaymentResponse;
@@ -23,7 +26,10 @@ public class UserCheckoutServiceImpl implements UserCheckoutService {
     private SalesOrderDetailService salesOrderDetailService;
 
     @Autowired
-    PayPalPaymentService payPalPaymentService;
+    private PayPalPaymentService payPalPaymentService;
+
+    @Autowired
+    private StripePaymentService stripePaymentService;
 
     @Override
     public Object processOrder(SalesOrderDTO salesOrderDTO) throws Exception {
@@ -57,10 +63,11 @@ public class UserCheckoutServiceImpl implements UserCheckoutService {
 
     }
 
-//    @Override
-//    public PaymentResponse completeOrder(String paymentId, String payerId, String supplierId) {
-//        return payPalPaymentService.completePayment(paymentId, payerId, supplierId).getBody();
-//    }
+    @Override
+    public Object processOrderByStripe(StripePaymentRequest request) {
+        StripePaymentResponse response = stripePaymentService.createCharge(request).getBody();
+        return response;
+    }
 
     private SalesOrder convertToSalesOrder(SalesOrderDTO request) {
         SalesOrder salesOrder = new SalesOrder();

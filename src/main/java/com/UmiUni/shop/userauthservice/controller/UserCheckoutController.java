@@ -2,6 +2,7 @@ package com.UmiUni.shop.userauthservice.controller;
 
 import com.UmiUni.shop.userauthservice.dto.SalesOrderDTO;
 import com.UmiUni.shop.userauthservice.entity.SalesOrder;
+import com.UmiUni.shop.userauthservice.extrenal.model.StripePaymentRequest;
 import com.UmiUni.shop.userauthservice.model.OrderCreationRequest;
 import com.UmiUni.shop.userauthservice.model.PaymentResponse;
 import com.UmiUni.shop.userauthservice.service.UserCheckoutService;
@@ -19,6 +20,9 @@ public class UserCheckoutController {
     @Autowired
     private UserCheckoutService userCheckoutService;
 
+    /**
+     * PayPal
+     */
     // localhost:9024/api/users/checkout/create-order
     @PostMapping("/create-order")
     public ResponseEntity<?> createOrderAndCheckout(@RequestBody SalesOrderDTO orderRequest) {
@@ -37,5 +41,21 @@ public class UserCheckoutController {
 //        PaymentResponse paymentResponse = userCheckoutService.completeOrder(paymentId, payerId, supplierId);
 //        return ResponseEntity.ok(paymentResponse);
 //    }
+
+    /**
+     * Stripe
+     * http://localhost:9024/api/users/checkout/stripe/charge
+     */
+    @PostMapping("/stripe/charge")
+    public ResponseEntity<?> payByStripe(@RequestBody StripePaymentRequest request) {
+        try {
+            Object response = userCheckoutService.processOrderByStripe(request);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            // Log the exception and return an appropriate error response
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
 
 }

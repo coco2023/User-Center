@@ -97,4 +97,26 @@ paymentId=PAYID-MWQ5UPY6JS463554L670574T&PayerID=3YGU5VNUABDU8&SupplierId=1
 POST localhost:9024/api/users/checkout/complete-order?paymentId=PAYID-MWQY4UY5ED84563H1514780C&PayerID=3YGU5VNUABDU8&SupplierId=1
 Content-Type: application/json
 
-###
+### Stripe Payment
+POST http://localhost:9024/api/users/checkout/stripe/charge
+Content-Type: application/json
+
+{
+  "token": "tok_visa",
+  "salesOrder": {
+    "salesOrderSn": "ORDER00568",
+    "customerId": 1,
+    "supplierId": 1,
+    "customerName": "John Doe",
+    "customerEmail": "johndoe@example.com",
+    "orderDate": "2024-01-11T15:30:45",
+    "totalAmount": 1.00,
+    "shippingAddress": "123 Main St, Anytown, AT 12345",
+    "billingAddress": "456 Secondary St, Othertown, OT 67890",
+    "orderStatus": "PENDING",
+    "paymentMethod": "PayPal",
+    "paymentProcessed": false,
+    "lastUpdated": "2024-01-11T10:00:00",
+    "expirationDate": "2024-02-11T10:00:00"
+  }
+}

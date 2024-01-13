@@ -42,7 +42,7 @@ public class UserPayService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
 
-        return stripePaymentService.createCharge(details);
+        return stripePaymentService.createChargeTest(details);
     }
 
 
