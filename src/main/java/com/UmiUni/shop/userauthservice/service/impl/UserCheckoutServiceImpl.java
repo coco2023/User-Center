@@ -4,17 +4,14 @@ import com.UmiUni.shop.userauthservice.dto.SalesOrderDTO;
 import com.UmiUni.shop.userauthservice.dto.SalesOrderDetailDTO;
 import com.UmiUni.shop.userauthservice.entity.SalesOrder;
 import com.UmiUni.shop.userauthservice.entity.SalesOrderDetail;
-import com.UmiUni.shop.userauthservice.extrenal.PayPalPaymentService;
+import com.UmiUni.shop.userauthservice.extrenal.payment.PayPalPaymentService;
 import com.UmiUni.shop.userauthservice.extrenal.salesOrder.SalesOrderDetailService;
 import com.UmiUni.shop.userauthservice.extrenal.salesOrder.SalesOrderService;
-import com.UmiUni.shop.userauthservice.model.OrderCreationRequest;
 import com.UmiUni.shop.userauthservice.model.PaymentResponse;
 import com.UmiUni.shop.userauthservice.service.UserCheckoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserCheckoutServiceImpl implements UserCheckoutService {
@@ -29,7 +26,7 @@ public class UserCheckoutServiceImpl implements UserCheckoutService {
     PayPalPaymentService payPalPaymentService;
 
     @Override
-    public SalesOrder processOrder(SalesOrderDTO salesOrderDTO) throws Exception {
+    public Object processOrder(SalesOrderDTO salesOrderDTO) throws Exception {
 
         // Step 1: Create Sales Order
         SalesOrder salesOrder = convertToSalesOrder(salesOrderDTO);
@@ -56,14 +53,14 @@ public class UserCheckoutServiceImpl implements UserCheckoutService {
 
         // Update SalesOrder with payment status
 
-        return createdOrder;
+        return paymentResponse.getBody();
 
     }
 
-    @Override
-    public PaymentResponse completeOrder(String paymentId, String payerId, String supplierId) {
-        return payPalPaymentService.completePayment(paymentId, payerId, supplierId).getBody();
-    }
+//    @Override
+//    public PaymentResponse completeOrder(String paymentId, String payerId, String supplierId) {
+//        return payPalPaymentService.completePayment(paymentId, payerId, supplierId).getBody();
+//    }
 
     private SalesOrder convertToSalesOrder(SalesOrderDTO request) {
         SalesOrder salesOrder = new SalesOrder();

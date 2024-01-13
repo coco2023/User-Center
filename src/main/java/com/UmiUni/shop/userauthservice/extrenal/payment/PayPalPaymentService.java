@@ -1,4 +1,4 @@
-package com.UmiUni.shop.userauthservice.extrenal;
+package com.UmiUni.shop.userauthservice.extrenal.payment;
 
 import com.UmiUni.shop.userauthservice.entity.SalesOrder;
 import com.UmiUni.shop.userauthservice.extrenal.model.TransactionDetails;
@@ -19,8 +19,8 @@ public interface PayPalPaymentService {
     @PostMapping("/api/v1/payments/paypal/create")
     public ResponseEntity<?> createPayment(@RequestBody SalesOrder salesOrder);
 
-    // Endpoint to complete a payment
-    @PostMapping("/api/v1/payments/paypal/complete")
-    public ResponseEntity<PaymentResponse> completePayment(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId, @RequestParam("SupplierId") String supplierId);
+//    // Endpoint to complete a payment
+//    @PostMapping("/api/v1/payments/paypal/complete")
+//    public ResponseEntity<PaymentResponse> completePayment(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId, @RequestParam("SupplierId") String supplierId);
 
 }

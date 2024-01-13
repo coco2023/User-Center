@@ -7,7 +7,7 @@ import com.UmiUni.shop.userauthservice.model.PaymentResponse;
 
 public interface UserCheckoutService {
 
-    SalesOrder processOrder(SalesOrderDTO orderRequest) throws Exception;
+    Object processOrder(SalesOrderDTO orderRequest) throws Exception;
 
-    PaymentResponse completeOrder(String paymentId, String payerId, String supplierId);
+//    PaymentResponse completeOrder(String paymentId, String payerId, String supplierId);
 }

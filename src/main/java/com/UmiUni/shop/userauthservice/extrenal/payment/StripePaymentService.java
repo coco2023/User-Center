@@ -1,4 +1,4 @@
-package com.UmiUni.shop.userauthservice.extrenal;
+package com.UmiUni.shop.userauthservice.extrenal.payment;
 
 import com.UmiUni.shop.userauthservice.extrenal.model.ChargeRequest;
 import org.springframework.cloud.openfeign.FeignClient;

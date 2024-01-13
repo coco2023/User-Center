@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/users/checkout")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserCheckoutController {
 
     @Autowired
@@ -22,18 +23,19 @@ public class UserCheckoutController {
     @PostMapping("/create-order")
     public ResponseEntity<?> createOrderAndCheckout(@RequestBody SalesOrderDTO orderRequest) {
         try {
-            SalesOrder salesOrder = userCheckoutService.processOrder(orderRequest);
-            return ResponseEntity.ok(salesOrder);
+            Object response = userCheckoutService.processOrder(orderRequest);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             // Log the exception and return an appropriate error response
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
-    // localhost:9024/api/users/checkout/complete-order
-    @PostMapping("/complete-order")
-    public ResponseEntity<?> completeOrderAndCheckout(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId, @RequestParam("SupplierId") String supplierId) {
-        PaymentResponse paymentResponse = userCheckoutService.completeOrder(paymentId, payerId, supplierId);
-        return ResponseEntity.ok(paymentResponse);
-    }
+//    // localhost:9024/api/users/checkout/complete-order
+//    @PostMapping("/complete-order")
+//    public ResponseEntity<?> completeOrderAndCheckout(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId, @RequestParam("SupplierId") String supplierId) {
+//        PaymentResponse paymentResponse = userCheckoutService.completeOrder(paymentId, payerId, supplierId);
+//        return ResponseEntity.ok(paymentResponse);
+//    }
+
 }

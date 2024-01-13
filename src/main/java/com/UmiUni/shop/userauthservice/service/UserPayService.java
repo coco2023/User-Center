@@ -1,9 +1,9 @@
 package com.UmiUni.shop.userauthservice.service;
 
 import com.UmiUni.shop.userauthservice.entity.User;
-import com.UmiUni.shop.userauthservice.extrenal.AliPayPaymentService;
-import com.UmiUni.shop.userauthservice.extrenal.PayPalPaymentService;
-import com.UmiUni.shop.userauthservice.extrenal.StripePaymentService;
+import com.UmiUni.shop.userauthservice.extrenal.payment.AliPayPaymentService;
+import com.UmiUni.shop.userauthservice.extrenal.payment.PayPalPaymentService;
+import com.UmiUni.shop.userauthservice.extrenal.payment.StripePaymentService;
 import com.UmiUni.shop.userauthservice.extrenal.model.ChargeRequest;
 import com.UmiUni.shop.userauthservice.extrenal.model.TransactionDetails;
 import com.UmiUni.shop.userauthservice.repository.UserRepository;
