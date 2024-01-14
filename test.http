@@ -120,3 +120,13 @@ Content-Type: application/json
     "expirationDate": "2024-02-11T10:00:00"
   }
 }
+
+### Create Alipay Payment
+POST http://localhost:9024/api/users/checkout/alipay/pay
+Content-Type: application/json
+
+{
+  "amount": 1.00,
+  "currency": "CNY",
+  "orderNumber": "SO-0000002"
+}

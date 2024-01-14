@@ -2,6 +2,8 @@ package com.UmiUni.shop.userauthservice.controller;
 
 import com.UmiUni.shop.userauthservice.dto.SalesOrderDTO;
 import com.UmiUni.shop.userauthservice.entity.SalesOrder;
+import com.UmiUni.shop.userauthservice.extrenal.model.AlipayRequest;
+import com.UmiUni.shop.userauthservice.extrenal.model.AlipayResponse;
 import com.UmiUni.shop.userauthservice.extrenal.model.StripePaymentRequest;
 import com.UmiUni.shop.userauthservice.model.OrderCreationRequest;
 import com.UmiUni.shop.userauthservice.model.PaymentResponse;
@@ -57,5 +59,18 @@ public class UserCheckoutController {
         }
     }
 
-
+    /**
+     * AliPay
+     * http://localhost:9024/api/users/checkout/alipay/pay
+     */
+    @PostMapping("/alipay/pay")
+    public ResponseEntity<?> payByAlipay(@RequestBody AlipayRequest alipayRequest) {
+        try {
+            AlipayResponse alipayResponse = userCheckoutService.processOrderByAlipay(alipayRequest);
+            return ResponseEntity.ok(alipayResponse);
+        } catch (Exception e) {
+            // Log the exception and return an appropriate error response
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 }

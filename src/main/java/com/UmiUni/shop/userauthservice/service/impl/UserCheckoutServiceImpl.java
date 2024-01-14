@@ -4,8 +4,11 @@ import com.UmiUni.shop.userauthservice.dto.SalesOrderDTO;
 import com.UmiUni.shop.userauthservice.dto.SalesOrderDetailDTO;
 import com.UmiUni.shop.userauthservice.entity.SalesOrder;
 import com.UmiUni.shop.userauthservice.entity.SalesOrderDetail;
+import com.UmiUni.shop.userauthservice.extrenal.model.AlipayRequest;
+import com.UmiUni.shop.userauthservice.extrenal.model.AlipayResponse;
 import com.UmiUni.shop.userauthservice.extrenal.model.StripePaymentRequest;
 import com.UmiUni.shop.userauthservice.extrenal.model.StripePaymentResponse;
+import com.UmiUni.shop.userauthservice.extrenal.payment.AliPayPaymentService;
 import com.UmiUni.shop.userauthservice.extrenal.payment.PayPalPaymentService;
 import com.UmiUni.shop.userauthservice.extrenal.payment.StripePaymentService;
 import com.UmiUni.shop.userauthservice.extrenal.salesOrder.SalesOrderDetailService;
@@ -30,6 +33,9 @@ public class UserCheckoutServiceImpl implements UserCheckoutService {
 
     @Autowired
     private StripePaymentService stripePaymentService;
+
+    @Autowired
+    private AliPayPaymentService aliPayPaymentService;
 
     @Override
     public Object processOrder(SalesOrderDTO salesOrderDTO) throws Exception {
@@ -67,6 +73,14 @@ public class UserCheckoutServiceImpl implements UserCheckoutService {
     public Object processOrderByStripe(StripePaymentRequest request) {
         StripePaymentResponse response = stripePaymentService.createCharge(request).getBody();
         return response;
+    }
+
+    @Override
+    public AlipayResponse processOrderByAlipay(AlipayRequest alipayRequest) {
+        // check user info
+
+        // make payment
+        return aliPayPaymentService.createPayment(alipayRequest).getBody();
     }
 
     private SalesOrder convertToSalesOrder(SalesOrderDTO request) {
